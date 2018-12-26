@@ -1,0 +1,38 @@
+{
+  "name": "log-express-middleware",
+  "version": "0.0.1",
+  "description": "日志打印中间件",
+  "main": "index.js",
+  "dependencies": {
+    "on-finished": "^2.3.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.1",
+    "sinon": "^7.0.0",
+    "supertest": "^3.3.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhike-team/log-express-middleware.git"
+  },
+  "keywords": [
+    "express",
+    "log"
+  ],
+  "author": "renxing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhike-team/log-express-middleware/issues"
+  },
+  "homepage": "https://github.com/zhike-team/log-express-middleware#readme"
+}
