@@ -12,8 +12,11 @@ $ npm install @zhike/log-express-middleware
 ```
 const logger = require('@zhike/log-express-middleware')
 const Express = require('express')
+var bodyParser = require('body-parser')
 
 const app = new Express()
+
+app.use(bodyParser.json())
 
 //只打印requestBody
 app.use(logger())

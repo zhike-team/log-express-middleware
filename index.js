@@ -1,6 +1,5 @@
 
 const uuidv4 = require('uuid/v4')
-var onFinished = require('on-finished')
 
 module.exports = logger
 
@@ -54,7 +53,7 @@ function logger (opts) {
     }
 
     // 打印requestBody的配置
-    if (req.body) {
+    if (req.body && Object.keys(req.body).length) {
       logger.originalLogger(JSON.stringify(req.body))
     }
 

@@ -103,7 +103,6 @@ describe('测试配置', function () {
 			.expect(200)
 			.then((data)=>{
 				const requestHeaders = log.getCall(2).args[0] 
-				console.log('heeee', requestHeaders)
 				assert.ok(requestHeaders === 'content-type: application/json')
 			})
   })
