@@ -1,19 +1,19 @@
-# log-koa-middleware
+# log-express-middleware
 日志打印中间件
 
 ![image](example.png)
 
 # Install
 ```
-$ npm install @zhike/log-koa-middleware
+$ npm install @zhike/log-express-middleware
 ```
 
 # Example
 ```
-const logger = require('@zhike/log-koa-middleware')
-const Koa = require('koa')
+const logger = require('@zhike/log-express-middleware')
+const Express = require('express')
 
-const app = new Koa()
+const app = new Express()
 
 //只打印requestBody
 app.use(logger())
