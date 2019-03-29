@@ -94,7 +94,12 @@ function logger (opts) {
         const responseBodyWhiteList = defaultOptions.responseBodyWhiteList
         const responseBodyBlackList = defaultOptions.responseBodyBlackList
         
-        let logBody = Buffer.concat(chunks).toString('utf8')
+        let logBody
+        if (Buffer.isBuffer(chunks[0])) {
+          logBody = Buffer.concat(chunks).toString('utf8')
+        } else {
+          logBody = chunks.join("")
+        }
 
         // 用户可以在业务代码中添加该标志来应对 正则匹配后的剔除情况
         if (req.useResponseBodyOption !== false) {
