@@ -44,3 +44,4 @@ app.use(logger({
 3. 默认不打印responseBody。
 4. responseBodyWhiteList和不能和responseBodyBlackList同时传值
 5. responseBodyWhiteList和responseBodyBlackList暂未支持同一path不同method,后续会完善。
+6. 在express的中间件函数中 ，可以通过 req._reqId 取到reqId。可以在使用console.log时带上。

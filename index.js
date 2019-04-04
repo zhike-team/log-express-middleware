@@ -3,8 +3,6 @@ const uuidv4 = require('uuid/v4')
 
 module.exports = logger
 
-logger.originalLogger = console.log 
-
 function logger (opts) {
   let reqId
   let defaultOptions = {
@@ -33,13 +31,12 @@ function logger (opts) {
     } else {
       reqId = uuidv4()
     }
+    req._reqId = reqId
 
     const startTime = new Date()
 
-    console.log = logger.originalLogger.bind(console, `${reqId}: `)
-
-    logger.originalLogger(`--------> req[${reqId}]`)
-    logger.originalLogger(req.method, req.originalUrl)
+    console.log(`--------> req[${req._reqId}]`)
+    console.log(req.method, req.originalUrl)
 
     // 打印requestHeaders
     const headers = req.headers
@@ -47,18 +44,18 @@ function logger (opts) {
     if (Array.isArray(requestHeaders) && requestHeaders.length > 0) {
       requestHeaders.forEach(item => {
         if (headers[item.toLowerCase()]) {
-          logger.originalLogger(`${item}: ${headers[item]}`)
+          console.log(`${item}: ${headers[item]}`)
         }
       })
     }
 
     // 打印requestBody的配置
     if (req.body && Object.keys(req.body).length) {
-      logger.originalLogger(JSON.stringify(req.body))
+      console.log(JSON.stringify(req.body))
     }
 
     // request 结束符
-    logger.originalLogger(`-------- req[${reqId}]`)
+    console.log(`-------- req[${req._reqId}]`)
 
     const oldEnd = res.end
     const oldWrite = res.write
@@ -80,11 +77,11 @@ function logger (opts) {
       // 打印responseHeaders
       const responseHeaders = defaultOptions.responseHeaders
       if (Array.isArray(responseHeaders) && responseHeaders.length > 0) {
-        logger.originalLogger(`======== resp headers[${reqId}]`)
+        console.log(`======== resp headers[${req._reqId}]`)
         responseHeaders.forEach(item => {
           const currentHeader = res.get(item.toLowerCase())
           if (currentHeader) {
-            logger.originalLogger(`${item}: ${currentHeader}`)
+            console.log(`${item}: ${currentHeader}`)
           }
         })
       }
@@ -106,15 +103,15 @@ function logger (opts) {
           if (Array.isArray(responseBodyWhiteList) && responseBodyWhiteList.length>0) {
             for (let path of responseBodyWhiteList) {
               if (path === req.path || (path instanceof RegExp && path.test(req.path))) {
-                logger.originalLogger(`======== resp body[${reqId}]`)
-                logger.originalLogger(logBody)
+                console.log(`======== resp body[${req._reqId}]`)
+                console.log(logBody)
               } 
             }
           } else if (Array.isArray(responseBodyBlackList) && responseBodyBlackList.length>0) {
             for (let path of responseBodyBlackList) {
               if (path !== req.path && (path instanceof RegExp && !path.test(req.path))) {
-                logger.originalLogger(`======== resp body[${reqId}]`)
-                logger.originalLogger(logBody)
+                console.log(`======== resp body[${req._reqId}]`)
+                console.log(logBody)
               } 
             }
           }
@@ -124,7 +121,7 @@ function logger (opts) {
       // response 结束符
       // 打印完整url及响应时间
       const endTime = new Date()
-      logger.originalLogger(`<======== resp[${reqId}] ${res.statusCode} ${endTime - startTime} ms`)
+      console.log(`<======== resp[${req._reqId}] ${res.statusCode} ${endTime - startTime} ms`)
     }
 
     next()

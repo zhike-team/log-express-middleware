@@ -1,6 +1,6 @@
 {
   "name": "@zhike/log-express-middleware",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "日志打印中间件",
   "main": "index.js",
   "dependencies": {
