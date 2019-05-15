@@ -60,7 +60,7 @@ function logger (opts) {
       }
 
       if (_log.requestBody) {
-        console.log(JSON.stringify(requestBody))
+        console.log(JSON.stringify(_log.requestBody))
       }
     }
 
