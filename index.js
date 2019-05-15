@@ -6,6 +6,7 @@ module.exports = logger
 function logger (opts) {
   let reqId
   let defaultOptions = {
+    handler: null,
     requestHeaders: [],
     responseHeaders: [],
     responseBodyWhiteList:[],
@@ -51,7 +52,16 @@ function logger (opts) {
 
     // 打印requestBody的配置
     if (req.body && Object.keys(req.body).length) {
-      console.log(JSON.stringify(req.body))
+      const _log = {}
+      _log.requestBody = Object.assign({}, req.body)
+
+      if (defaultOptions.handler) {
+        defaultOptions.handler(req, res, _log)
+      }
+
+      if (_log.requestBody) {
+        console.log(JSON.stringify(requestBody))
+      }
     }
 
     // request 结束符

@@ -37,6 +37,8 @@ app.use(logger({
 | responseHeaders | Array                      | 需要打印的response头部 (默认不打印)                 |
 | responseBodyWhiteList               | Array                           | 白名单,字符串数组，可为正则(对于正则匹配剔除部分路由,可在业务代码中的ctx.useResponseBodyOption=false跳过路由规则)                            |
 | responseBodyBlackList       | Array                           | 黑名单,字符串数组,可为正则(对于正则匹配剔除部分路由,可在业务代码中使用ctx.useResponseBodyOption=false跳过路由规则)                      |
+| handler       | Function(req, res, _log)                           | 特殊处理函数。_log目前有requestBody属性，可以用来调整requestBody打印（是req.body的副本，进行修改，不会影响req.body）                     |
+
 
 注意： 
 1. 必会打印reqId,路径，方法，响应时间。
