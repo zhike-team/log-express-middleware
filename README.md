@@ -30,7 +30,7 @@ app.use(logger({
 
 // 对密码进行隐藏
 app.use(logger({
-  requestBodyHander: function(req, res, _log) {
+  handler: function(req, res, _log) {
     if (req.path === '/signin') {
       _log.requestBody.password = '****1**'
     }
